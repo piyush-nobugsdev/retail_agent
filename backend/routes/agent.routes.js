@@ -12,54 +12,50 @@ router.post("/chat", async (req, res) => {
   try {
     const { message, userId = "web_guest" } = req.body;
 
-    // 1️⃣ Load user memory (cross-channel)
+    /* -------------------------------
+       1️⃣ Load customer + memory
+    -------------------------------- */
     const customer = getCustomerById(userId);
-const memory = getMemory(userId);
-// After receiving user message
+    const memory = getMemory(userId);
 
+    /* -------------------------------
+       2️⃣ Extract & persist memory
+    -------------------------------- */
+    const extractedMemory = await extractUserMemory({
+      message,
+      existingMemory: memory
+    });
 
-// 1️⃣ Extract new memory from this message
-const extractedMemory = await extractUserMemory({
-  message,
-  existingMemory: memory
-});
+    if (Object.keys(extractedMemory).length > 0) {
+      updateMemory(userId, extractedMemory);
+    }
 
-// 2️⃣ Store it if something meaningful exists
-if (Object.keys(extractedMemory).length > 0) {
-  updateMemory(userId, extractedMemory);
-}
-
+    /* -------------------------------
+       3️⃣ First LLM call (decide intent / tool)
+    -------------------------------- */
     const messages = [
-        {
-  role: "system",
-  content: `
-You are a top-tier retail sales assistant for a beauty brand.
+      {
+        role: "system",
+        content: `
+You are a senior beauty sales consultant.
 
 Customer Profile:
-${customer ? JSON.stringify(customer, null, 2) : "Unknown customer"}
+${customer ? JSON.stringify(customer, null, 2) : "Unknown"}
 
 Conversation Memory:
 ${JSON.stringify(memory, null, 2)}
 
 Rules:
-- Personalize recommendations
-- Remember preferences across turns
-- Ask clarifying questions if needed
-- Recommend grounded products only
-Customer profile:
-${JSON.stringify(memory, null, 2)}
-
-Use this information to personalize recommendations.
-Do NOT repeat it unless relevant.
-
+- Think like a premium in-store consultant
+- Recommend products only from catalog
+- Personalize advice deeply
+- Explain WHY a product fits the user
+- Do NOT dump raw product lists
 `
-}
-
-      ,
+      },
       { role: "user", content: message }
     ];
 
-    // 2️⃣ Call LLM with product search tool
     const response = await runLLMWithTools({
       messages,
       tools: [productSearchTool]
@@ -67,44 +63,68 @@ Do NOT repeat it unless relevant.
 
     const toolCall = response.message?.tool_calls?.[0];
 
-    // 3️⃣ If LLM called product search
+    /* -------------------------------
+       4️⃣ If LLM wants products
+    -------------------------------- */
     if (toolCall) {
       const args = JSON.parse(toolCall.function.arguments);
       const products = searchProducts(args);
 
-      // 🧠 VERY IMPORTANT: convert products → readable text
-      const textReply =
-        products.length === 0
-          ? "Sorry, I couldn't find matching products."
-          : products
-              .map(
-                (p) =>
-                  `• ${p.name} (${p.brand}) – ₹${p.price}\n  Good for: ${p.attributes?.skinConcern?.join(
-                    ", "
-                  )}`
-              )
-              .join("\n\n");
+      if (products.length === 0) {
+        return res.json({
+          reply:
+            "I couldn’t find a perfect match yet. Could you tell me a bit more about your skin concerns or budget?"
+        });
+      }
 
-      return res.json({ reply: textReply });
+      /* -------------------------------
+         5️⃣ Second LLM call (SALES MODE)
+      -------------------------------- */
+      const salesMessages = [
+        {
+          role: "system",
+          content: `
+You are an expert beauty advisor.
+
+Customer Profile:
+${customer ? JSON.stringify(customer, null, 2) : "Unknown"}
+
+Known Preferences:
+${JSON.stringify(getMemory(userId), null, 2)}
+
+Available Products (ONLY recommend from these):
+${JSON.stringify(products, null, 2)}
+
+Instructions:
+- Recommend 1–3 best products
+- Explain benefits in simple language
+- Match concerns, skin type, lifestyle
+- Sound confident, premium, human
+- End with a gentle follow-up question
+`
+        },
+        {
+          role: "user",
+          content:
+            "Recommend the best products for this customer and explain why."
+        }
+      ];
+
+      const salesResponse = await runLLMWithTools({
+        messages: salesMessages
+      });
+
+      return res.json({
+        reply: salesResponse.message?.content || "Here are my recommendations."
+      });
     }
 
-    // 4️⃣ Normal LLM text response
-    const text = response.message?.content || "No response";
-
-    // 5️⃣ VERY BASIC memory extraction (hackathon-safe)
-    const updates = {};
-
-if (/oily/i.test(message)) updates.skinType = "oily";
-if (/dry/i.test(message)) updates.skinType = "dry";
-if (/acne/i.test(message)) updates.concern = "acne";
-if (/pigment/i.test(message)) updates.concern = "pigmentation";
-
-if (Object.keys(updates).length > 0) {
-  updateMemory(userId, updates);
-}
-
-
-    res.json({ reply: text });
+    /* -------------------------------
+       6️⃣ Normal conversation reply
+    -------------------------------- */
+    res.json({
+      reply: response.message?.content || "How can I help you today?"
+    });
   } catch (err) {
     console.error("Agent error:", err);
     res.status(500).json({ error: err.message });
