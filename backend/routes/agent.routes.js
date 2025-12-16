@@ -2,46 +2,90 @@ import express from "express";
 import { runLLMWithTools } from "../services/llm.service.js";
 import { productSearchTool } from "../tools/product.tool.js";
 import { searchProducts } from "../services/product.service.js";
+import { getMemory, updateMemory } from "../services/memory.service.js";
+import { getCustomerById } from "../services/customer.service.js";
 
 const router = express.Router();
 
 router.post("/chat", async (req, res) => {
   try {
-    const { message } = req.body;
+    const { message, userId = "web_guest" } = req.body;
+
+    // 1️⃣ Load user memory (cross-channel)
+    const customer = getCustomerById(userId);
+const memory = getMemory(userId);
+
 
     const messages = [
-      {
-        role: "system",
-        content:
-          "You are a top-tier retail sales assistant for a beauty brand. Ask clarifying questions if needed and recommend products."
-      },
+        {
+  role: "system",
+  content: `
+You are a top-tier retail sales assistant for a beauty brand.
+
+Customer Profile:
+${customer ? JSON.stringify(customer, null, 2) : "Unknown customer"}
+
+Conversation Memory:
+${JSON.stringify(memory, null, 2)}
+
+Rules:
+- Personalize recommendations
+- Remember preferences across turns
+- Ask clarifying questions if needed
+- Recommend grounded products only
+`
+}
+
+      ,
       { role: "user", content: message }
     ];
 
-    // 1️⃣ Call LLM with tool
+    // 2️⃣ Call LLM with product search tool
     const response = await runLLMWithTools({
       messages,
       tools: [productSearchTool]
     });
 
-    // 2️⃣ If LLM decided to call a tool
     const toolCall = response.message?.tool_calls?.[0];
 
+    // 3️⃣ If LLM called product search
     if (toolCall) {
       const args = JSON.parse(toolCall.function.arguments);
-
-      // 3️⃣ Call real product service
       const products = searchProducts(args);
 
-      return res.json({
-        reply: products
-      });
+      // 🧠 VERY IMPORTANT: convert products → readable text
+      const textReply =
+        products.length === 0
+          ? "Sorry, I couldn't find matching products."
+          : products
+              .map(
+                (p) =>
+                  `• ${p.name} (${p.brand}) – ₹${p.price}\n  Good for: ${p.attributes?.skinConcern?.join(
+                    ", "
+                  )}`
+              )
+              .join("\n\n");
+
+      return res.json({ reply: textReply });
     }
 
-    // 4️⃣ Normal LLM response
-    res.json({
-      reply: response.message?.content || "No response"
-    });
+    // 4️⃣ Normal LLM text response
+    const text = response.message?.content || "No response";
+
+    // 5️⃣ VERY BASIC memory extraction (hackathon-safe)
+    const updates = {};
+
+if (/oily/i.test(message)) updates.skinType = "oily";
+if (/dry/i.test(message)) updates.skinType = "dry";
+if (/acne/i.test(message)) updates.concern = "acne";
+if (/pigment/i.test(message)) updates.concern = "pigmentation";
+
+if (Object.keys(updates).length > 0) {
+  updateMemory(userId, updates);
+}
+
+
+    res.json({ reply: text });
   } catch (err) {
     console.error("Agent error:", err);
     res.status(500).json({ error: err.message });

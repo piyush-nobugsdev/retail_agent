@@ -1,17 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [message, setMessage] = useState("");
   const [reply, setReply] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-
+  const [customers, setCustomers] = useState([]);
+  const [selectedCustomer, setSelectedCustomer] = useState("");
+  
+   // 🔹 Load customers for dropdown
+  useEffect(() => {
+    fetch("http://localhost:5000/api/worker/customers")
+      .then((res) => res.json())
+      .then((data) => {
+        setCustomers(data);
+        if (data.length > 0) {
+          setSelectedCustomer(data[0].customer_id);
+        }
+      });
+  }, []);
+  
   const sendMessage = async () => {
-    if (!message.trim()) return;
+    if (!message.trim() || !selectedCustomer) return;
 
     setLoading(true);
-    setReply(null);
+    setReply("");
 
     try {
       const res = await fetch("http://localhost:5000/api/agent/chat", {
@@ -19,11 +33,12 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({ message, userId: selectedCustomer})
       });
 
       const data = await res.json();
       setReply(data.reply);
+      setMessage("");
     } catch (err) {
       setReply("Error contacting agent");
     } finally {
@@ -34,6 +49,23 @@ export default function Home() {
   return (
     <main style={{ padding: 40, maxWidth: 600 }}>
       <h1>Retail AI Agent</h1>
+      {/* 👤 Customer Selector */}
+      <label>
+        Customer:
+        <select
+          value={selectedCustomer}
+          onChange={(e) => setSelectedCustomer(e.target.value)}
+          style={{ marginLeft: 10 }}
+        >
+          {customers.map((c: any) => (
+            <option key={c.customer_id} value={c.customer_id}>
+              {c.name} ({c.loyalty_tier})
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <br /><br />
 
       <textarea
         rows={4}
