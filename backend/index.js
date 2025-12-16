@@ -4,12 +4,14 @@ import cors from "cors";
 import OpenAI from "openai";
 import workerRoutes from "./routes/worker.routes.js";
 import agentRoutes from "./routes/agent.routes.js";
-
+import whatsappRoutes from "./routes/whatsapp.routes.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/worker", workerRoutes);
 app.use("/api/agent", agentRoutes);
+app.use("/api/whatsapp", whatsappRoutes);
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });

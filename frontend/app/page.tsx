@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 
@@ -8,7 +9,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("");
-  
+  const router = useRouter();
+
    // 🔹 Load customers for dropdown
   useEffect(() => {
     fetch("http://localhost:5000/api/worker/customers")
@@ -78,6 +80,25 @@ export default function Home() {
       <button onClick={sendMessage} disabled={loading}>
         {loading ? "Thinking..." : "Send"}
       </button>
+
+      <button
+  onClick={() => {
+    if (!selectedCustomer) return;
+    router.push(`/whatsapp?customerId=${selectedCustomer}`);
+  }}
+  style={{
+    marginLeft: 10,
+    background: "#25D366",
+    color: "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: 6
+  }}
+>
+  Continue on WhatsApp
+</button>
+
+      
 
       {reply && (
         <div style={{ marginTop: 20 }}>

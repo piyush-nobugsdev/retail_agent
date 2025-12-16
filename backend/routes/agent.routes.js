@@ -4,6 +4,7 @@ import { productSearchTool } from "../tools/product.tool.js";
 import { searchProducts } from "../services/product.service.js";
 import { getMemory, updateMemory } from "../services/memory.service.js";
 import { getCustomerById } from "../services/customer.service.js";
+import { extractUserMemory } from "../services/llm.service.js";
 
 const router = express.Router();
 
@@ -14,7 +15,19 @@ router.post("/chat", async (req, res) => {
     // 1️⃣ Load user memory (cross-channel)
     const customer = getCustomerById(userId);
 const memory = getMemory(userId);
+// After receiving user message
 
+
+// 1️⃣ Extract new memory from this message
+const extractedMemory = await extractUserMemory({
+  message,
+  existingMemory: memory
+});
+
+// 2️⃣ Store it if something meaningful exists
+if (Object.keys(extractedMemory).length > 0) {
+  updateMemory(userId, extractedMemory);
+}
 
     const messages = [
         {
@@ -33,6 +46,12 @@ Rules:
 - Remember preferences across turns
 - Ask clarifying questions if needed
 - Recommend grounded products only
+Customer profile:
+${JSON.stringify(memory, null, 2)}
+
+Use this information to personalize recommendations.
+Do NOT repeat it unless relevant.
+
 `
 }
 
