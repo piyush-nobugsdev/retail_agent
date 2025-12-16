@@ -1,0 +1,751 @@
+[
+  {
+    "sku": "sku_b101",
+    "name": "Vitamin C Brightening Serum",
+    "brand": "Minimalist",
+    "category": "beauty",
+    "subCategory": "skincare",
+    "price": 699,
+    "currency": "INR",
+    "image": "https://example.com/serum.jpg",
+    "attributes": {
+      "skinType": ["oily", "combination", "normal"],
+      "skinConcern": ["dark spots", "dullness"],
+      "keyIngredients": ["Vitamin C", "Niacinamide"],
+      "texture": "serum",
+      "formulation": "water-based",
+      "dermatologicallyTested": true,
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "pH": "5.5",
+      "usageTime": ["morning", "night"]
+    },
+    "usage": {
+      "howToUse": "Apply 2–3 drops on clean face before moisturizer",
+      "frequency": "once daily",
+      "shelfLifeMonths": 24,
+      "expiryAfterOpeningMonths": 6,
+      "countryOfOrigin": "India"
+    },
+    "tags": ["brightening", "daily-use", "beginner-friendly"],
+    "ratings": { "average": 4.5, "count": 1243 },
+    "safety": {
+      "parabenFree": true,
+      "sulphateFree": true,
+      "crueltyFree": true,
+      "vegan": true
+    }
+  },
+
+  {
+    "sku": "sku_b102",
+    "name": "Gentle Skin Cleanser",
+    "brand": "Cetaphil",
+    "category": "beauty",
+    "subCategory": "skincare",
+    "price": 350,
+    "currency": "INR",
+    "image": "https://example.com/cleanser.jpg",
+    "attributes": {
+      "skinType": ["dry", "normal", "sensitive"],
+      "skinConcern": ["cleansing", "sensitivity"],
+      "keyIngredients": ["Glycerin", "Panthenol"],
+      "texture": "lotion",
+      "formulation": "soap-free",
+      "dermatologicallyTested": true,
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "pH": "6.0",
+      "usageTime": ["morning", "night"]
+    },
+    "usage": {
+      "howToUse": "Massage gently on wet skin and rinse",
+      "frequency": "twice daily",
+      "shelfLifeMonths": 36,
+      "expiryAfterOpeningMonths": 12,
+      "countryOfOrigin": "India"
+    },
+    "tags": ["gentle", "daily-use"],
+    "ratings": { "average": 4.6, "count": 3200 },
+    "safety": {
+      "parabenFree": true,
+      "sulphateFree": true,
+      "crueltyFree": true,
+      "vegan": false
+    }
+  },
+
+  {
+    "sku": "sku_b103",
+    "name": "Salicylic Acid Face Wash",
+    "brand": "Minimalist",
+    "category": "beauty",
+    "subCategory": "skincare",
+    "price": 299,
+    "currency": "INR",
+    "image": "https://example.com/facewash.jpg",
+    "attributes": {
+      "skinType": ["oily", "acne-prone"],
+      "skinConcern": ["acne", "oiliness"],
+      "keyIngredients": ["Salicylic Acid"],
+      "texture": "gel",
+      "formulation": "water-based",
+      "dermatologicallyTested": true,
+      "fragranceFree": true,
+      "nonComedogenic": true,
+      "pH": "5.2",
+      "usageTime": ["morning", "night"]
+    },
+    "usage": {
+      "howToUse": "Apply on wet face, massage and rinse",
+      "frequency": "twice daily",
+      "shelfLifeMonths": 24,
+      "expiryAfterOpeningMonths": 6,
+      "countryOfOrigin": "India"
+    },
+    "tags": ["acne-care"],
+    "ratings": { "average": 4.4, "count": 2100 },
+    "safety": {
+      "parabenFree": true,
+      "sulphateFree": true,
+      "crueltyFree": true,
+      "vegan": true
+    }
+  },
+
+  {
+    "sku": "sku_b104",
+    "name": "Hydro Boost Water Gel",
+    "brand": "Neutrogena",
+    "category": "beauty",
+    "subCategory": "skincare",
+    "price": 950,
+    "currency": "INR",
+    "image": "https://example.com/hydroboost.jpg",
+    "attributes": {
+      "skinType": ["normal", "combination"],
+      "skinConcern": ["dehydration"],
+      "keyIngredients": ["Hyaluronic Acid"],
+      "texture": "gel",
+      "formulation": "oil-free",
+      "dermatologicallyTested": true,
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "pH": "5.6",
+      "usageTime": ["morning", "night"]
+    },
+    "usage": {
+      "howToUse": "Apply evenly on face and neck",
+      "frequency": "twice daily",
+      "shelfLifeMonths": 36,
+      "expiryAfterOpeningMonths": 12,
+      "countryOfOrigin": "India"
+    },
+    "tags": ["hydration"],
+    "ratings": { "average": 4.7, "count": 5400 },
+    "safety": {
+      "parabenFree": true,
+      "sulphateFree": true,
+      "crueltyFree": false,
+      "vegan": false
+    }
+  },
+
+  {
+    "sku": "sku_b105",
+    "name": "9 to 5 Primer",
+    "brand": "Lakme",
+    "category": "beauty",
+    "subCategory": "makeup",
+    "price": 475,
+    "currency": "INR",
+    "image": "https://example.com/primer.jpg",
+    "attributes": {
+      "skinType": ["all"],
+      "skinConcern": ["pores"],
+      "keyIngredients": ["Silicone"],
+      "texture": "cream",
+      "formulation": "silicone-based",
+      "dermatologicallyTested": true,
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "pH": "neutral",
+      "usageTime": ["morning"]
+    },
+    "usage": {
+      "howToUse": "Apply before foundation",
+      "frequency": "as needed",
+      "shelfLifeMonths": 24,
+      "expiryAfterOpeningMonths": 12,
+      "countryOfOrigin": "India"
+    },
+    "tags": ["makeup-base"],
+    "ratings": { "average": 4.3, "count": 1900 },
+    "safety": {
+      "parabenFree": false,
+      "sulphateFree": true,
+      "crueltyFree": true,
+      "vegan": false
+    }
+  },
+
+  {
+    "sku": "sku_b106",
+    "name": "Fit Me Foundation",
+    "brand": "Maybelline",
+    "category": "beauty",
+    "subCategory": "makeup",
+    "price": 549,
+    "currency": "INR",
+    "image": "https://example.com/foundation.jpg",
+    "attributes": {
+      "skinType": ["normal", "oily"],
+      "skinConcern": ["uneven tone"],
+      "keyIngredients": ["SPF", "Micro-powders"],
+      "texture": "liquid",
+      "formulation": "oil-free",
+      "dermatologicallyTested": true,
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "pH": "neutral",
+      "usageTime": ["morning"]
+    },
+    "usage": {
+      "howToUse": "Blend evenly using sponge or brush",
+      "frequency": "as needed",
+      "shelfLifeMonths": 36,
+      "expiryAfterOpeningMonths": 12,
+      "countryOfOrigin": "India"
+    },
+    "tags": ["daily-makeup"],
+    "ratings": { "average": 4.5, "count": 6200 },
+    "safety": {
+      "parabenFree": false,
+      "sulphateFree": true,
+      "crueltyFree": true,
+      "vegan": false
+    }
+  },
+
+  {
+    "sku": "sku_b107",
+    "name": "Advanced Night Repair",
+    "brand": "Estee Lauder",
+    "category": "beauty",
+    "subCategory": "skincare",
+    "price": 5000,
+    "currency": "INR",
+    "image": "https://example.com/anr.jpg",
+    "attributes": {
+      "skinType": ["all"],
+      "skinConcern": ["aging"],
+      "keyIngredients": ["Bifida Ferment"],
+      "texture": "serum",
+      "formulation": "water-based",
+      "dermatologicallyTested": true,
+      "fragranceFree": false,
+      "nonComedogenic": true,
+      "pH": "5.7",
+      "usageTime": ["night"]
+    },
+    "usage": {
+      "howToUse": "Apply before moisturizer",
+      "frequency": "once daily",
+      "shelfLifeMonths": 36,
+      "expiryAfterOpeningMonths": 12,
+      "countryOfOrigin": "UK"
+    },
+    "tags": ["anti-aging"],
+    "ratings": { "average": 4.8, "count": 8900 },
+    "safety": {
+      "parabenFree": true,
+      "sulphateFree": true,
+      "crueltyFree": false,
+      "vegan": false
+    }
+  }, 
+
+{
+  "sku": "sku_b108",
+  "name": "Green Tea Alcohol-Free Toner",
+  "brand": "Plum",
+  "category": "beauty",
+  "subCategory": "skincare",
+  "price": 390,
+  "currency": "INR",
+  "image": "https://example.com/toner.jpg",
+  "attributes": {
+    "skinType": ["oily", "combination"],
+    "skinConcern": ["oil control", "acne"],
+    "keyIngredients": ["Green Tea"],
+    "texture": "liquid",
+    "formulation": "alcohol-free",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "5.4",
+    "usageTime": ["morning", "night"]
+  },
+  "usage": {
+    "howToUse": "Apply using cotton pad after cleansing",
+    "frequency": "twice daily",
+    "shelfLifeMonths": 24,
+    "expiryAfterOpeningMonths": 6,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["oil-control"],
+  "ratings": { "average": 4.3, "count": 1800 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": true
+  }
+},
+{
+  "sku": "sku_b109",
+  "name": "SPF 50 PA+++ Sunscreen",
+  "brand": "Dot & Key",
+  "category": "beauty",
+  "subCategory": "skincare",
+  "price": 445,
+  "currency": "INR",
+  "image": "https://example.com/sunscreen.jpg",
+  "attributes": {
+    "skinType": ["all"],
+    "skinConcern": ["sun protection"],
+    "keyIngredients": ["Zinc Oxide"],
+    "texture": "cream",
+    "formulation": "mineral",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "neutral",
+    "usageTime": ["morning"]
+  },
+  "usage": {
+    "howToUse": "Apply generously before sun exposure",
+    "frequency": "daily",
+    "shelfLifeMonths": 24,
+    "expiryAfterOpeningMonths": 6,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["sun-care"],
+  "ratings": { "average": 4.4, "count": 2600 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": true
+  }
+},
+{
+  "sku": "sku_b110",
+  "name": "Niacinamide 10% Serum",
+  "brand": "The Derma Co",
+  "category": "beauty",
+  "subCategory": "skincare",
+  "price": 599,
+  "currency": "INR",
+  "image": "https://example.com/niacinamide.jpg",
+  "attributes": {
+    "skinType": ["oily", "acne-prone"],
+    "skinConcern": ["pores", "oiliness"],
+    "keyIngredients": ["Niacinamide"],
+    "texture": "serum",
+    "formulation": "water-based",
+    "dermatologicallyTested": true,
+    "fragranceFree": true,
+    "nonComedogenic": true,
+    "pH": "5.6",
+    "usageTime": ["night"]
+  },
+  "usage": {
+    "howToUse": "Apply 2 drops after cleansing",
+    "frequency": "once daily",
+    "shelfLifeMonths": 24,
+    "expiryAfterOpeningMonths": 6,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["pore-care"],
+  "ratings": { "average": 4.5, "count": 3400 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": true
+  }
+},
+{
+  "sku": "sku_b111",
+  "name": "Ceramide Moisturizer",
+  "brand": "Re'equil",
+  "category": "beauty",
+  "subCategory": "skincare",
+  "price": 395,
+  "currency": "INR",
+  "image": "https://example.com/ceramide.jpg",
+  "attributes": {
+    "skinType": ["dry", "sensitive"],
+    "skinConcern": ["barrier repair"],
+    "keyIngredients": ["Ceramides"],
+    "texture": "cream",
+    "formulation": "barrier-repair",
+    "dermatologicallyTested": true,
+    "fragranceFree": true,
+    "nonComedogenic": true,
+    "pH": "5.7",
+    "usageTime": ["morning", "night"]
+  },
+  "usage": {
+    "howToUse": "Apply after serum",
+    "frequency": "twice daily",
+    "shelfLifeMonths": 24,
+    "expiryAfterOpeningMonths": 12,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["barrier-care"],
+  "ratings": { "average": 4.6, "count": 2100 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": true
+  }
+},
+{
+  "sku": "sku_b112",
+  "name": "Matte Lipstick",
+  "brand": "Kay Beauty",
+  "category": "beauty",
+  "subCategory": "makeup",
+  "price": 999,
+  "currency": "INR",
+  "image": "https://example.com/lipstick.jpg",
+  "attributes": {
+    "skinType": ["all"],
+    "skinConcern": ["pigmentation"],
+    "keyIngredients": ["Vitamin E"],
+    "texture": "matte",
+    "formulation": "cream",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "neutral",
+    "usageTime": ["anytime"]
+  },
+  "usage": {
+    "howToUse": "Apply directly on lips",
+    "frequency": "as needed",
+    "shelfLifeMonths": 36,
+    "expiryAfterOpeningMonths": 18,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["lip-makeup"],
+  "ratings": { "average": 4.4, "count": 1500 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": true
+  }
+},
+{
+  "sku": "sku_b113",
+  "name": "Ruby Woo Lipstick",
+  "brand": "MAC",
+  "category": "beauty",
+  "subCategory": "makeup",
+  "price": 2300,
+  "currency": "INR",
+  "image": "https://example.com/maclip.jpg",
+  "attributes": {
+    "skinType": ["all"],
+    "skinConcern": ["lip color"],
+    "keyIngredients": ["Vitamin E"],
+    "texture": "matte",
+    "formulation": "cream",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "neutral",
+    "usageTime": ["anytime"]
+  },
+  "usage": {
+    "howToUse": "Apply directly on lips",
+    "frequency": "as needed",
+    "shelfLifeMonths": 36,
+    "expiryAfterOpeningMonths": 24,
+    "countryOfOrigin": "USA"
+  },
+  "tags": ["luxury-makeup"],
+  "ratings": { "average": 4.8, "count": 5000 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": false,
+    "vegan": false
+  }
+},
+{
+  "sku": "sku_b114",
+  "name": "Eyeshadow Palette",
+  "brand": "Huda Beauty",
+  "category": "beauty",
+  "subCategory": "makeup",
+  "price": 4800,
+  "currency": "INR",
+  "image": "https://example.com/eyeshadow.jpg",
+  "attributes": {
+    "skinType": ["all"],
+    "skinConcern": ["eye makeup"],
+    "keyIngredients": ["Pigments"],
+    "texture": "powder",
+    "formulation": "pressed",
+    "dermatologicallyTested": true,
+    "fragranceFree": true,
+    "nonComedogenic": true,
+    "pH": "neutral",
+    "usageTime": ["anytime"]
+  },
+  "usage": {
+    "howToUse": "Apply using eyeshadow brush",
+    "frequency": "as needed",
+    "shelfLifeMonths": 48,
+    "expiryAfterOpeningMonths": 24,
+    "countryOfOrigin": "UAE"
+  },
+  "tags": ["eye-makeup"],
+  "ratings": { "average": 4.7, "count": 4200 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": false,
+    "vegan": false
+  }
+},
+{
+  "sku": "sku_b115",
+  "name": "Makeup Fixer",
+  "brand": "Swiss Beauty",
+  "category": "beauty",
+  "subCategory": "makeup",
+  "price": 249,
+  "currency": "INR",
+  "image": "https://example.com/fixer.jpg",
+  "attributes": {
+    "skinType": ["all"],
+    "skinConcern": ["makeup longevity"],
+    "keyIngredients": ["Aloe Vera"],
+    "texture": "mist",
+    "formulation": "water-based",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "neutral",
+    "usageTime": ["anytime"]
+  },
+  "usage": {
+    "howToUse": "Spray after makeup",
+    "frequency": "as needed",
+    "shelfLifeMonths": 24,
+    "expiryAfterOpeningMonths": 6,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["setting-spray"],
+  "ratings": { "average": 4.2, "count": 2900 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": true
+  }
+},
+
+{
+  "sku": "sku_b116",
+  "name": "Perfect Match Primer",
+  "brand": "Colorbar",
+  "category": "beauty",
+  "subCategory": "makeup",
+  "price": 850,
+  "currency": "INR",
+  "image": "https://example.com/colorbar_primer.jpg",
+  "attributes": {
+    "skinType": ["all"],
+    "skinConcern": ["pores", "smooth base"],
+    "keyIngredients": ["Silicone"],
+    "texture": "cream",
+    "formulation": "silicone-based",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "neutral",
+    "usageTime": ["morning"]
+  },
+  "usage": {
+    "howToUse": "Apply evenly before foundation",
+    "frequency": "as needed",
+    "shelfLifeMonths": 36,
+    "expiryAfterOpeningMonths": 12,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["makeup-base"],
+  "ratings": { "average": 4.3, "count": 1700 },
+  "safety": {
+    "parabenFree": false,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": false
+  }
+},
+{
+  "sku": "sku_b117",
+  "name": "Compact Powder",
+  "brand": "Faces Canada",
+  "category": "beauty",
+  "subCategory": "makeup",
+  "price": 399,
+  "currency": "INR",
+  "image": "https://example.com/compact.jpg",
+  "attributes": {
+    "skinType": ["normal", "oily"],
+    "skinConcern": ["shine control"],
+    "keyIngredients": ["Talc"],
+    "texture": "powder",
+    "formulation": "pressed",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "neutral",
+    "usageTime": ["anytime"]
+  },
+  "usage": {
+    "howToUse": "Apply with puff or brush",
+    "frequency": "as needed",
+    "shelfLifeMonths": 48,
+    "expiryAfterOpeningMonths": 24,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["face-makeup"],
+  "ratings": { "average": 4.2, "count": 2200 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": false
+  }
+},
+{
+  "sku": "sku_b118",
+  "name": "Revitalift Anti-Aging Cream",
+  "brand": "L'Oreal Paris",
+  "category": "beauty",
+  "subCategory": "skincare",
+  "price": 999,
+  "currency": "INR",
+  "image": "https://example.com/revitalift.jpg",
+  "attributes": {
+    "skinType": ["normal", "dry"],
+    "skinConcern": ["aging", "fine lines"],
+    "keyIngredients": ["Pro-Retinol"],
+    "texture": "cream",
+    "formulation": "anti-aging",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "5.6",
+    "usageTime": ["night"]
+  },
+  "usage": {
+    "howToUse": "Apply on face and neck at night",
+    "frequency": "once daily",
+    "shelfLifeMonths": 36,
+    "expiryAfterOpeningMonths": 12,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["anti-aging"],
+  "ratings": { "average": 4.5, "count": 4100 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": false,
+    "vegan": false
+  }
+},
+{
+  "sku": "sku_b119",
+  "name": "Moisture Surge Cream",
+  "brand": "Clinique",
+  "category": "beauty",
+  "subCategory": "skincare",
+  "price": 4200,
+  "currency": "INR",
+  "image": "https://example.com/moisturesurge.jpg",
+  "attributes": {
+    "skinType": ["all"],
+    "skinConcern": ["dehydration"],
+    "keyIngredients": ["Aloe Vera", "Hyaluronic Acid"],
+    "texture": "gel-cream",
+    "formulation": "oil-free",
+    "dermatologicallyTested": true,
+    "fragranceFree": true,
+    "nonComedogenic": true,
+    "pH": "5.8",
+    "usageTime": ["morning", "night"]
+  },
+  "usage": {
+    "howToUse": "Apply evenly on face",
+    "frequency": "twice daily",
+    "shelfLifeMonths": 36,
+    "expiryAfterOpeningMonths": 12,
+    "countryOfOrigin": "USA"
+  },
+  "tags": ["hydration"],
+  "ratings": { "average": 4.7, "count": 5300 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": false,
+    "vegan": false
+  }
+},
+{
+  "sku": "sku_b120",
+  "name": "Facial Cleanser",
+  "brand": "Forest Essentials",
+  "category": "beauty",
+  "subCategory": "skincare",
+  "price": 1850,
+  "currency": "INR",
+  "image": "https://example.com/forest_cleanser.jpg",
+  "attributes": {
+    "skinType": ["normal", "dry"],
+    "skinConcern": ["gentle cleansing"],
+    "keyIngredients": ["Neem", "Aloe Vera"],
+    "texture": "gel",
+    "formulation": "ayurvedic",
+    "dermatologicallyTested": true,
+    "fragranceFree": false,
+    "nonComedogenic": true,
+    "pH": "5.9",
+    "usageTime": ["morning", "night"]
+  },
+  "usage": {
+    "howToUse": "Massage on wet face and rinse",
+    "frequency": "twice daily",
+    "shelfLifeMonths": 24,
+    "expiryAfterOpeningMonths": 6,
+    "countryOfOrigin": "India"
+  },
+  "tags": ["luxury-skincare"],
+  "ratings": { "average": 4.6, "count": 1600 },
+  "safety": {
+    "parabenFree": true,
+    "sulphateFree": true,
+    "crueltyFree": true,
+    "vegan": true
+  }
+}
+
+]
