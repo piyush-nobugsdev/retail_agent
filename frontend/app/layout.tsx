@@ -1,18 +1,33 @@
 import "./globals.css";
+import { Inter, Playfair_Display } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap"
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap"
+});
 
 export const metadata = {
-  title: "Retail AI Agent",
-  description: "AI-driven retail assistant",
+  title: "Lumina",
+  description: "AI-powered beauty consultant"
 };
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${inter.variable} ${playfair.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

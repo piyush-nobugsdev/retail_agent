@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function WhatsAppPage() {
   const searchParams = useSearchParams();
@@ -9,93 +9,135 @@ export default function WhatsAppPage() {
 
   const [messages, setMessages] = useState<any[]>([]);
   const [text, setText] = useState("");
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
- const sendMessage = async () => {
-  if (!text.trim() || !customerId) return;
+  /* 🔹 Auto scroll */
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-  const userMsg = { from: "user", text };
-  setMessages((prev) => [...prev, userMsg]);
-  setText("");
+  const sendMessage = async () => {
+    if (!text.trim() || !customerId) return;
 
-  const res = await fetch("http://localhost:5000/api/whatsapp/message", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      customerId,
-      message: text // ✅ FIXED
-    })
-  });
+    const userText = text;
+    setMessages((prev) => [...prev, { from: "user", text: userText }]);
+    setText("");
 
-  const data = await res.json();
+    const res = await fetch("http://localhost:5000/api/whatsapp/message", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        customerId,
+        message: userText
+      })
+    });
 
-  const botMsg = { from: "bot", text: data.reply };
-  setMessages((prev) => [...prev, botMsg]);
-};
+    const data = await res.json();
+    setMessages((prev) => [...prev, { from: "bot", text: data.reply }]);
+  };
 
   return (
-    <main
+    <div
       style={{
-        maxWidth: 420,
-        margin: "auto",
-        padding: 20,
-        fontFamily: "Arial"
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        background: "#efeae2",
+       fontFamily: "var(--font-sans)"
+
       }}
     >
-      <h2 style={{ textAlign: "center" }}>WhatsApp Sales Assistant</h2>
-
+      {/* 🟢 HEADER */}
       <div
         style={{
-          height: 420,
+          height: 56,
+          background: "#075E54",
+          color: "white",
+          display: "flex",
+          alignItems: "center",
+          padding: "0 16px",
+          fontWeight: 600
+        }}
+      >
+        Lumina • WhatsApp
+      </div>
+
+      {/* 💬 CHAT AREA */}
+      <div
+        style={{
+          flex: 1,
           overflowY: "auto",
-          background: "#46454dff",
-          padding: 10,
-          borderRadius: 8,
-          marginBottom: 10
+          padding: "16px",
+          backgroundImage:
+            "linear-gradient(#efeae2, #efeae2)"
         }}
       >
         {messages.map((m, i) => (
           <div
             key={i}
             style={{
-              textAlign: m.from === "user" ? "right" : "left",
-              marginBottom: 8
+              display: "flex",
+              justifyContent: m.from === "user" ? "flex-end" : "flex-start",
+              marginBottom: 10
             }}
           >
-            <span
+            <div
               style={{
-                display: "inline-block",
-                background: m.from === "user" ? "#0e7e4aff" : "#fff",
+                background: m.from === "user" ? "#dcf8c6" : "#ffffff",
                 padding: "8px 12px",
-                borderRadius: 10,
-                maxWidth: "80%"
+                borderRadius: 8,
+                maxWidth: "75%",
+                fontSize: 14,
+                lineHeight: 1.4,
+                boxShadow: "0 1px 1px rgba(0,0,0,0.1)"
               }}
             >
               {m.text}
-            </span>
+            </div>
           </div>
         ))}
+        <div ref={bottomRef} />
       </div>
 
-      <div style={{ display: "flex", gap: 6 }}>
+      {/* ⌨️ INPUT BAR */}
+      <div
+        style={{
+          padding: 10,
+          background: "#f0f0f0",
+          display: "flex",
+          gap: 8,
+          alignItems: "center"
+        }}
+      >
         <input
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Type a message"
-          style={{ flex: 1, padding: 8 }}
+          style={{
+            flex: 1,
+            padding: "10px 14px",
+            borderRadius: 20,
+            border: "1px solid #ccc",
+            outline: "none",
+            fontSize: 14
+          }}
         />
         <button
           onClick={sendMessage}
           style={{
-            background: "#11a949ff",
+            background: "#25D366",
             color: "white",
             border: "none",
-            padding: "8px 14px",
-            borderRadius: 6
+            padding: "10px 16px",
+            borderRadius: 20,
+            fontWeight: 600,
+            cursor: "pointer"
           }}
         >
           Send
         </button>
       </div>
-    </main>
+    </div>
   );
 }

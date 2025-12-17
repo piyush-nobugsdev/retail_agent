@@ -1,17 +1,13 @@
 "use client";
-import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
-  const [message, setMessage] = useState("");
-  const [reply, setReply] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-  const [customers, setCustomers] = useState([]);
+export default function LandingPage() {
+  const [customers, setCustomers] = useState<any[]>([]);
   const [selectedCustomer, setSelectedCustomer] = useState("");
   const router = useRouter();
 
-   // 🔹 Load customers for dropdown
   useEffect(() => {
     fetch("http://localhost:5000/api/worker/customers")
       .then((res) => res.json())
@@ -22,125 +18,69 @@ export default function Home() {
         }
       });
   }, []);
-  
-  const sendMessage = async () => {
-    if (!message.trim() || !selectedCustomer) return;
-
-    setLoading(true);
-    setReply("");
-
-    try {
-      const res = await fetch("http://localhost:5000/api/agent/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message, userId: selectedCustomer})
-      });
-
-      const data = await res.json();
-      setReply(data.reply);
-      setMessage("");
-    } catch (err) {
-      setReply("Error contacting agent");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
-    <main style={{ padding: 40, maxWidth: 600 }}>
-      <h1>Retail AI Agent</h1>
-      {/* 👤 Customer Selector */}
-      <label>
-        Customer:
+    <main style={{ textAlign: "center", width: "100%" }}>
+      {/* HERO */}
+      <h1 style={{ fontSize: 48, marginBottom: 8 }}>Welcome to Lumina</h1>
+      <p style={{ opacity: 0.85, marginBottom: 40 }}>
+        Your intelligent beauty retail assistant
+      </p>
+
+      {/* WHITE CARD */}
+      <div
+        style={{
+          background: "#ffffff",
+          color: "#000",
+          borderRadius: 12,
+          padding: 30,
+          width: 360,
+          margin: "0 auto",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.25)"
+        }}
+      >
+        <p style={{ marginBottom: 10, fontWeight: 600 }}>
+          Choose Profile
+        </p>
+
         <select
           value={selectedCustomer}
           onChange={(e) => setSelectedCustomer(e.target.value)}
-          style={{ marginLeft: 10 }}
+          style={{
+            width: "100%",
+            padding: 10,
+            borderRadius: 6,
+            border: "1px solid #ccc",
+            marginBottom: 20
+          }}
         >
-          {customers.map((c: any) => (
+          {customers.map((c) => (
             <option key={c.customer_id} value={c.customer_id}>
-              {c.name} ({c.loyalty_tier})
+              {c.name} • {c.loyalty_tier}
             </option>
           ))}
         </select>
-      </label>
 
-      <br /><br />
-
-      <textarea
-        rows={4}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Ask me about products, availability, or offers..."
-        style={{ width: "100%", marginBottom: 10 }}
-      />
-
-      <button onClick={sendMessage} disabled={loading}>
-        {loading ? "Thinking..." : "Send"}
-      </button>
-
-      <button
-  onClick={() => {
-    if (!selectedCustomer) return;
-    router.push(`/whatsapp?customerId=${selectedCustomer}`);
-  }}
-  style={{
-    marginLeft: 10,
-    background: "#25D366",
-    color: "white",
-    border: "none",
-    padding: "8px 14px",
-    borderRadius: 6
-  }}
->
-  Continue on WhatsApp
-</button>
-
-      
-
-      {reply && (
-        <div style={{ marginTop: 20 }}>
-          <strong>Agent:</strong>
-
-          {/* TEXT RESPONSE */}
-          {typeof reply === "string" && <p>{reply}</p>}
-
-          {/* PRODUCT LIST RESPONSE */}
-          {Array.isArray(reply) && (
-            <div style={{ marginTop: 10 }}>
-              {reply.map((product) => (
-                <div
-                  key={product.sku}
-                  style={{
-                    border: "1px solid #ddd",
-                    borderRadius: 8,
-                    padding: 12,
-                    marginBottom: 10
-                  }}
-                >
-                  <h3>{product.name}</h3>
-                  <p>
-                    <strong>Brand:</strong> {product.brand}
-                  </p>
-                  <p>
-                    <strong>Price:</strong> ₹{product.price}
-                  </p>
-                  <p>
-                    <strong>Skin Type:</strong>{" "}
-                    {product.attributes.skinType.join(", ")}
-                  </p>
-                  <p>
-                    <strong>Concern:</strong>{" "}
-                    {product.attributes.skinConcern.join(", ")}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+        <button
+          onClick={() =>
+            router.push(`/chat?customerId=${selectedCustomer}`)
+          }
+          style={{
+            width: "100%",
+            padding: 12,
+            background: "#0f172a",
+            color: "#fff",
+            border: "none",
+            borderRadius: 8,
+            fontWeight: 600,
+            cursor: "pointer"
+          }}
+        >
+          Meet Lumina
+        </button>
+      </div>
     </main>
   );
 }
+
+
