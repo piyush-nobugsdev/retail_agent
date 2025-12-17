@@ -82,5 +82,20 @@ Extract NEW or UPDATED preferences only.
   });
 
   const data = await res.json();
-  return JSON.parse(data.choices[0].message.content);
+
+  const raw = data.choices[0].message.content;
+
+  // 🛡️ HARDENED JSON PARSING
+  try {
+    // Remove markdown fences if present
+    const cleaned = raw
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+    return JSON.parse(cleaned);
+  } catch (err) {
+    console.error("❌ Memory parse failed:", raw);
+    return {}; // NEVER crash the app
+  }
 }
